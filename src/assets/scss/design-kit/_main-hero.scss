@@ -1,0 +1,37 @@
+.main-hero{
+    height: 5.6em;
+    background: rgba(193, 199, 152, 0.859);
+    border: 3px solid #ddc0d1be; 
+    border-radius: 1em;
+    margin: 0 2px 10px 2px;
+
+    .intro-paragraph{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        text-align: center;
+        
+        p{
+            padding: 0.4em;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #373232;
+
+            a{
+                text-decoration: underline;
+                color: #373232;
+
+                &:hover{
+                    color: rgba(82, 10, 148, 0.788);
+                }
+            }
+
+
+        }
+
+    }
+
+
+
+
+}
