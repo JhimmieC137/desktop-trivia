@@ -1,4 +1,4 @@
-# Jimi's Trivia
+# Desktop Trivia
 A quiz game application created for desktops(i.e Windows, Unix, MacOS, etc). Inspired by one of the projects from Udacity's Full-stack developer course but unlike it, this is a desktop application.
 
 ### How it works
