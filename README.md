@@ -12,6 +12,6 @@ To run the application locally, clone the repo. install node.js on your local ma
 After the installation is complete or successful, start the app with the command `npm start`.
 
 ### Updates 
-This app is still in it's beta phase, more updates in UI, API, etc.
+This app is still in it's beta phase, more updates in UI, API, etc., to come.
 
 Cheers
