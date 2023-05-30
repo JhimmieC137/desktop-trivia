@@ -6,7 +6,7 @@ const SectionMainHeader = () => {
         <div className="main-header">
             <h1>
                 <a href='/'>    
-                    Trivia
+                    Desktop Trivia
                 </a>  
             </h1>
             {/* <button onClick = {() => {

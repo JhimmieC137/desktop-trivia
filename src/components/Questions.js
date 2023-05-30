@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 
 import server from '../utils'
 import SectionPanelHandle from "./sections/SectionPanelHandle";
@@ -7,10 +9,24 @@ import SectionPanelHandle from "./sections/SectionPanelHandle";
 const Questions = () => {
     const [questions, setQuestions] = useState([])
     const [categories, setCategories] = useState([])
+    const history = useHistory()
 
     useEffect(() => {
 
-        fetch(server.absolute_url + '/questions')
+        var token
+        const tokenData = JSON.parse(window.localStorage.getItem("tokens"))
+        if (!tokenData) {
+            history.push('/')
+        }else{
+            token = `Bearer ` + tokenData.access
+        }
+
+        fetch(server.absolute_url + '/questions',{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        })
         .then((res) => (res.json()))
         .then((data) => {
             setQuestions(data.questions);
@@ -19,8 +35,12 @@ const Questions = () => {
             console.log(err.message);
         });
 
-        fetch(server.absolute_url + '/categories')
-           .then((res) => res.json())
+        fetch(server.absolute_url + '/categories',{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        }).then((res) => res.json())
            .then((data) => {
                setCategories(data);
            })
@@ -30,7 +50,20 @@ const Questions = () => {
     }, []);
 
     const getQuestionsById = (category_id) => {
-        fetch(`${server.absolute_url}/categories/${category_id}/questions`)
+        var token
+        const tokenData = JSON.parse(window.localStorage.getItem("tokens"))
+        if (!tokenData) {
+            history.push('/')
+        }else{
+            token = `Bearer ` + tokenData.access
+        }
+
+        fetch(`${server.absolute_url}/categories/${category_id}/questions`,{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        })
         .then((res) => (res.json()))
         .then((data) => {
             setQuestions(data.questions);
@@ -38,6 +71,31 @@ const Questions = () => {
         .catch((err) => {
             console.log(err.message);
         });
+    }
+
+    const endSession = () => {
+        var token
+        const tokenData = JSON.parse(window.localStorage.getItem("tokens"))
+        if (!tokenData) {
+            history.push('/')
+        }else{
+            token = `Bearer ` + tokenData.access
+        }
+
+        let payload = tokenData.access.split('.')[1];
+        payload = JSON.parse(window.atob(payload))
+        
+        axios.post(`${server.absolute_url}/sign-out`,
+            {},
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": token
+                }
+            }
+        ).then((res) => console.log(res.data)).catch(err => console.log(err))
+
+        window.localStorage.removeItem("tokens")
     }
 
     
@@ -60,6 +118,7 @@ const Questions = () => {
                         ))}   
                     </ul>
                 </div>
+            <Link to='/' onClick={endSession} className="log-out">Log out</Link>
             </div>
             <SectionPanelHandle />
             <div className="display-panel">

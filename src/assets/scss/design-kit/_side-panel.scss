@@ -44,4 +44,15 @@
             }
         }
     }
+    a{  
+        display: flex;;
+        justify-content: center;
+        text-decoration: none;
+        color: #1e0303;
+        transition: 1s ease-in-out;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
 }
