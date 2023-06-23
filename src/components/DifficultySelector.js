@@ -1,9 +1,9 @@
 import React from "react";
-import DisplayLevels from "./sections/DisplayLevels";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import server from "../utils";
+import DisplayLevels from "./sections/DisplayLevels";
 
 const DifficultySelector = () => {
     
